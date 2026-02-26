@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -73,10 +73,6 @@
         var points = 0;
         var speed = 10;
 
-
-
-
-
         /**
          * This Function will be called 20 times/second.
          * Each time it is called, it should move the Box to a new location.
@@ -85,15 +81,15 @@
         function update() {
           // TODO 1 - TODO 2: Update position using speed variable
           positionX += speed;
-          
+
           // Move the box to the new position
           moveBoxTo(positionX);
-          
+
           // TODO 6: Check if box hit right boundary
           if (positionX > boardWidth) {
             speed *= -1;
           }
-          
+
           // TODO 7: Check if box hit left boundary
           if (positionX < 0) {
             speed *= -1;
@@ -110,17 +106,14 @@
         function handleBoxClick() {
           // TODO 3: Reset position and display text
           positionX = 0;
-          
+
           // TODO 4: Increment points and display on box
           points++;
           changeBoxText(points);
-          
+
           // TODO 8: Use linear formula to calculate speed based on points
           speed = 3 * points + 10;
         }
-
-
-        
       })();
     </script>
   </body>
