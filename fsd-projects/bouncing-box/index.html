@@ -69,6 +69,9 @@
         //////////////////////////////////////////////////////////////////
 
         // TODO 2 - Variable declarations
+        var positionX = 0;
+        var points = 0;
+        var speed = 10;
 
 
 
@@ -80,10 +83,21 @@
          * If the box drifts off the screen, turn it around!
          */
         function update() {
-
-        
-
+          // TODO 1 - TODO 2: Update position using speed variable
+          positionX += speed;
           
+          // Move the box to the new position
+          moveBoxTo(positionX);
+          
+          // TODO 6: Check if box hit right boundary
+          if (positionX > boardWidth) {
+            speed *= -1;
+          }
+          
+          // TODO 7: Check if box hit left boundary
+          if (positionX < 0) {
+            speed *= -1;
+          }
         }
 
         /**
@@ -94,10 +108,15 @@
          * - move the box to the left side of the screen.
          */
         function handleBoxClick() {
-
-
-
-
+          // TODO 3: Reset position and display text
+          positionX = 0;
+          
+          // TODO 4: Increment points and display on box
+          points++;
+          changeBoxText(points);
+          
+          // TODO 8: Use linear formula to calculate speed based on points
+          speed = 3 * points + 10;
         }
 
 

@@ -2,24 +2,21 @@ body {
     background: rgb(147, 229, 243);
     color: rgb(45, 45, 45);
     padding: 10px;
-    font-family: Arial, sans-
-    serif;
+    font-family: Arial, sans-serif;
 }
 
 #all-contents {
-    max-width: 
-    800px;
+    max-width: 800px;
     margin: auto;
 }
 
- /* navitagation menu */
+ /* navigation menu */
 nav {
     background: rgb(242, 48, 9);
     margin: 0 auto;
     display: flex;
     padding: 10px;
-    margin-bottom: 
-    20px;
+    margin-bottom: 20px;
 }
 
 h1  {
@@ -45,7 +42,6 @@ h1  {
 
 #nav-ul a {
     margin-right: 20px;
-}
 }
 
 a {
