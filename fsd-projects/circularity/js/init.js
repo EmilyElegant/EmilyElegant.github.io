@@ -27,7 +27,7 @@ var init = function (window) {
     }
     // TODO 3 : Call the drawCircle() function
     // Replaced by TODO 7 loop - see below
-    
+
     // BONUS TODO: Initialize gamification features (unlocked after completing educational TODOs)
     Gamification.init({
       canvas: canvas,
@@ -35,7 +35,7 @@ var init = function (window) {
       draw: draw,
       physikz: physikz,
       circles: circles,
-      game: game
+      game: game,
     });
     // TODO 7 : Use a loop to create multiple circles
     for (var i = 0; i < 50; i++) {
@@ -56,7 +56,7 @@ var init = function (window) {
         physikz.updatePosition(circles[i]);
         game.checkCirclePosition(circles[i]);
       }
-      
+
       // BONUS TODO: Update gamification features each frame
       Gamification.update();
     }

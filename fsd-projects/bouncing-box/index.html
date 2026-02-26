@@ -49,19 +49,47 @@
         });
 
         // Every 50 milliseconds, call the update Function (see below)
-        setInterval(update, 50);
+        var interval = setInterval(update, 50);
 
         // Every time the box is clicked, call the handleBoxClick Function (see below)
         box.on("click", handleBoxClick);
 
-        // moves the Box to a new position on the screen along the X-Axis
-        function moveBoxTo(newPositionX) {
+        // BONUS Challenge 6: Track mis-clicks on the board
+        var misclicks = 0;
+        jQuery(".board").on("click", function (event) {
+          // Check if the click was not on the box
+          if (event.target !== box[0]) {
+            misclicks++;
+            if (misclicks >= 10) {
+              endGame();
+            }
+          }
+        });
+
+        // moves the Box to a new position on the screen along the X-Axis and Y-Axis
+        function moveBoxTo(newPositionX, newPositionY) {
           box.css("left", newPositionX);
+          box.css("top", newPositionY);
         }
 
         // changes the text displayed on the Box
         function changeBoxText(newText) {
           box.text(newText);
+        }
+
+        // BONUS Challenge 4: Function to generate a random color
+        function getRandomColor() {
+          var r = Math.random() * 255;
+          var g = Math.random() * 255;
+          var b = Math.random() * 255;
+          return "rgb(" + r + ", " + g + ", " + b + ")";
+        }
+
+        // BONUS Challenge 6: Function to end the game
+        function endGame() {
+          clearInterval(interval);
+          changeBoxText("GAME OVER!");
+          box.css("background-color", "red");
         }
 
         //////////////////////////////////////////////////////////////////
@@ -72,6 +100,15 @@
         var positionX = 0;
         var points = 0;
         var speed = 10;
+        // BONUS Challenge 2: Vertical movement variables
+        var positionY = 100;
+        var speedY = 5;
+        var boardHeight = jQuery(window).height();
+
+        // Update boardHeight on window resize
+        jQuery(window).on("resize", function () {
+          boardHeight = jQuery(window).height();
+        });
 
         /**
          * This Function will be called 20 times/second.
@@ -81,9 +118,11 @@
         function update() {
           // TODO 1 - TODO 2: Update position using speed variable
           positionX += speed;
+          // BONUS Challenge 2: Update vertical position
+          positionY += speedY;
 
           // Move the box to the new position
-          moveBoxTo(positionX);
+          moveBoxTo(positionX, positionY);
 
           // TODO 6: Check if box hit right boundary
           if (positionX > boardWidth) {
@@ -93,6 +132,16 @@
           // TODO 7: Check if box hit left boundary
           if (positionX < 0) {
             speed *= -1;
+          }
+
+          // BONUS Challenge 2: Check if box hit bottom boundary
+          if (positionY > boardHeight) {
+            speedY *= -1;
+          }
+
+          // BONUS Challenge 2: Check if box hit top boundary
+          if (positionY < 0) {
+            speedY *= -1;
           }
         }
 
@@ -105,7 +154,9 @@
          */
         function handleBoxClick() {
           // TODO 3: Reset position and display text
-          positionX = 0;
+          // BONUS Challenge 3: Set random location on click
+          positionX = Math.random() * (boardWidth - 70);
+          positionY = Math.random() * (boardHeight - 70);
 
           // TODO 4: Increment points and display on box
           points++;
@@ -113,6 +164,12 @@
 
           // TODO 8: Use linear formula to calculate speed based on points
           speed = 3 * points + 10;
+
+          // BONUS Challenge 2: Also increase vertical speed
+          speedY = 2 * points + 3;
+
+          // BONUS Challenge 4: Change box color on click
+          box.css("background-color", getRandomColor());
         }
       })();
     </script>
